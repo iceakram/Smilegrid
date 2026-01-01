@@ -7,20 +7,20 @@
    CSS Custom Properties (Design Tokens)
    -------------------------------------------- */
 :root {
-    /* Color Palette - Warm neutrals */
-    --color-bg: #FAF8F5;
-    --color-bg-secondary: #F5F2EE;
+    /* Color Palette - White and Dark Blue */
+    --color-bg: #FFFFFF;
+    --color-bg-secondary: #F8FAFC;
     --color-surface: #FFFFFF;
-    --color-text-primary: #2D2A26;
-    --color-text-secondary: #6B6560;
-    --color-text-muted: #9A948D;
-    --color-accent: #FFCBA4;
-    --color-accent-soft: #FFE4CC;
-    --color-accent-glow: rgba(255, 203, 164, 0.6);
-    --color-border: rgba(45, 42, 38, 0.08);
-    --color-border-subtle: rgba(45, 42, 38, 0.06);
-    --color-shadow: rgba(45, 42, 38, 0.1);
-    --color-tile-empty: #EDE9E4;
+    --color-text-primary: #1E3A5F;
+    --color-text-secondary: #3D5A80;
+    --color-text-muted: #6B8CAE;
+    --color-accent: #1E3A5F;
+    --color-accent-soft: #E8F0FE;
+    --color-accent-glow: rgba(30, 58, 95, 0.4);
+    --color-border: rgba(30, 58, 95, 0.12);
+    --color-border-subtle: rgba(30, 58, 95, 0.08);
+    --color-shadow: rgba(30, 58, 95, 0.15);
+    --color-tile-empty: #E8F0FE;
     
     /* Typography */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -159,6 +159,11 @@ body {
     border: 1px solid var(--color-border-subtle);
 }
 
+.tile.placeholder {
+    /* Placeholder tiles with generated colors - no border needed */
+    border: none;
+}
+
 .tile img {
     width: 100%;
     height: 100%;
@@ -173,7 +178,7 @@ body {
 }
 
 /* Tile hover effect */
-.tile:not(.empty):hover {
+.tile:hover {
     transform: translate3d(0, 0, 0) scale(1.02);
     box-shadow: var(--shadow-md);
     z-index: 10;

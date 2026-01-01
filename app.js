@@ -543,28 +543,47 @@ function createTileElement(col, row) {
     const tileData = state.tiles.get(key);
     
     const tile = document.createElement('div');
-    tile.className = 'tile' + (tileData ? '' : ' empty');
+    tile.className = 'tile';
     tile.style.left = `${col * (CONFIG.TILE_SIZE + CONFIG.TILE_GAP)}px`;
     tile.style.top = `${row * (CONFIG.TILE_SIZE + CONFIG.TILE_GAP)}px`;
     tile.dataset.col = col;
     tile.dataset.row = row;
     
     if (tileData) {
+        // User uploaded image
         const img = document.createElement('img');
         img.src = tileData.src;
         img.alt = 'Smile';
         img.loading = 'lazy';
         img.onload = () => img.classList.add('loaded');
         img.onerror = () => {
-            // On error, show as empty tile
-            tile.classList.add('empty');
+            // On error, show as placeholder tile
+            tile.style.backgroundColor = generatePlaceholderColor(col, row);
             img.remove();
         };
         tile.appendChild(img);
+    } else {
+        // Generate a colored placeholder tile (no blank spaces)
+        tile.style.backgroundColor = generatePlaceholderColor(col, row);
+        tile.classList.add('placeholder');
     }
     
     elements.gridCanvas.appendChild(tile);
     state.tileElements.set(key, tile);
+}
+
+/**
+ * Generate a placeholder color based on tile position
+ * Creates a visually pleasing pattern of blues and complementary colors
+ */
+function generatePlaceholderColor(col, row) {
+    // Use position-based seeded random for consistent colors
+    const seed = (col * 7919 + row * 104729) % 1000;
+    const hue = 200 + (seed % 40); // Blue range (200-240)
+    const saturation = 30 + (seed % 30); // 30-60%
+    const lightness = 75 + (seed % 15); // 75-90%
+    
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
 /**

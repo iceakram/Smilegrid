@@ -684,7 +684,7 @@ function handleFileSelect(e) {
 function processFile(file) {
     // Validate file type
     if (!file.type.startsWith('image/')) {
-        alert('Please upload an image file.');
+        showToast('Please upload an image file.');
         return;
     }
     
@@ -743,7 +743,7 @@ function publishSmile() {
     // Find an empty tile position (procedural placement)
     const position = findEmptyTilePosition();
     if (!position) {
-        alert('The grid is full! Thank you for your smile.');
+        showToast('The grid is full! Thank you for your smile.');
         closeModal();
         return;
     }
@@ -953,6 +953,28 @@ function debounce(func, wait) {
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
+}
+
+/**
+ * Show a toast notification
+ * @param {string} message - The message to display
+ * @param {number} duration - Duration in milliseconds (default: 3000)
+ */
+function showToast(message, duration = 3000) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    
+    container.appendChild(toast);
+    
+    // Remove toast after duration
+    setTimeout(() => {
+        toast.classList.add('toast-out');
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }, duration);
 }
 
 // ============================================

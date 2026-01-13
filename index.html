@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="SmileGrid - A digital art experience built around human presence. Add your smile to the growing mosaic.">
+    <title>SmileGrid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Canvas Container -->
+    <div id="grid-container">
+        <div id="grid-canvas">
+            <!-- Tiles will be dynamically rendered here -->
+        </div>
+    </div>
+
+    <!-- Floating UI Elements -->
+    <header id="header">
+        <div class="logo">
+            <span class="logo-icon">😊</span>
+            <span class="logo-text">SmileGrid</span>
+        </div>
+        <div id="smile-counter" class="counter">
+            <span class="counter-number">0</span>
+            <span class="counter-label">smiles</span>
+        </div>
+    </header>
+
+    <!-- Primary CTA -->
+    <button id="add-smile-btn" class="cta-button" aria-label="Add your smile">
+        <span class="cta-icon">+</span>
+        <span class="cta-text">Add your smile</span>
+    </button>
+
+    <!-- Zoom Controls -->
+    <div id="zoom-controls" class="zoom-controls">
+        <button id="zoom-in" class="zoom-btn" aria-label="Zoom in">+</button>
+        <button id="zoom-out" class="zoom-btn" aria-label="Zoom out">−</button>
+        <button id="zoom-reset" class="zoom-btn zoom-reset" aria-label="Reset zoom">⊙</button>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="upload-modal" class="modal" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            
+            <!-- Step 1: Upload -->
+            <div class="upload-step" data-step="upload">
+                <h2>Add Your Smile</h2>
+                <p class="upload-subtitle">Share your smile with the world</p>
+                <div class="upload-dropzone" id="dropzone">
+                    <div class="dropzone-content">
+                        <div class="dropzone-icon">📷</div>
+                        <p class="dropzone-text">Drop your photo here</p>
+                        <p class="dropzone-hint">or click to browse</p>
+                    </div>
+                    <input type="file" id="file-input" accept="image/*" hidden>
+                </div>
+            </div>
+
+            <!-- Step 2: Preview & Crop -->
+            <div class="upload-step" data-step="preview" hidden>
+                <h2>Perfect Your Smile</h2>
+                <p class="upload-subtitle">Adjust the crop if needed</p>
+                <div class="preview-container">
+                    <div class="preview-wrapper">
+                        <img id="preview-image" src="" alt="Preview">
+                        <div class="crop-overlay"></div>
+                    </div>
+                </div>
+                <div class="preview-actions">
+                    <button class="btn btn-secondary" id="back-btn">Choose Another</button>
+                    <button class="btn btn-primary" id="publish-btn">Publish Smile</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Success -->
+            <div class="upload-step" data-step="success" hidden>
+                <div class="success-content">
+                    <div class="success-icon">✨</div>
+                    <h2>You're Part of SmileGrid!</h2>
+                    <p class="upload-subtitle">Your smile has been added to the mosaic</p>
+                    <button class="btn btn-primary" id="view-smile-btn">View Your Smile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Loading Indicator -->
+    <div id="loading" class="loading" hidden>
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
